@@ -16,6 +16,9 @@ public class Secreto extends javax.swing.JFrame {
      */
     public Secreto() {
         initComponents();
+        int numR1 = (int) (Math.random()*9 + 1);
+        int numR2 = (int) (Math.random()*10);
+        int numR3 = (int) (Math.random()*10);
     }
 
     /**
@@ -41,16 +44,22 @@ public class Secreto extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
+        jPasswordField1.setEditable(false);
         jPasswordField1.setText("$");
         jPasswordField1.setEchoChar('$');
         jPasswordField1.setFocusAccelerator('$');
+        jPasswordField1.setFocusable(false);
         jPasswordField1.addActionListener(this::jPasswordField1ActionPerformed);
 
+        jPasswordField3.setEditable(false);
         jPasswordField3.setText("$");
         jPasswordField3.setEchoChar('$');
+        jPasswordField3.setFocusable(false);
 
+        jPasswordField2.setEditable(false);
         jPasswordField2.setText("$");
         jPasswordField2.setEchoChar('$');
+        jPasswordField2.setFocusable(false);
         jPasswordField2.addActionListener(this::jPasswordField2ActionPerformed);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
