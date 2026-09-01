@@ -95,6 +95,11 @@ public class Secreto extends javax.swing.JFrame {
         jTextField1.setForeground(new java.awt.Color(255, 255, 255));
         jTextField1.setBorder(javax.swing.BorderFactory.createTitledBorder("Escribe 3 digitos + ENTER"));
         jTextField1.addActionListener(this::jTextField1ActionPerformed);
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
+        });
 
         jLabel1.setText("Porfavor ingrese exactamente 3 numeros");
 
@@ -177,6 +182,28 @@ public class Secreto extends javax.swing.JFrame {
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordField1ActionPerformed
+
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+        // TODO add your handling code here:
+        if (evt.getKeyChar() == java.awt.event.KeyEvent.VK_ENTER) {
+        String texto = jTextField1.getText().trim();
+
+        if (texto.length() == 3 && texto.matches("\\d+")) {
+            
+            int numeroIngresado = Integer.parseInt(texto);
+            
+            if (numeroIngresado < numeroSecreto) {
+                jLabel1.setText("El número secreto es MAS ALTO");
+            } else if (numeroIngresado > numeroSecreto) {
+                jLabel1.setText("El número secreto es MAS BAJO");
+            } else {
+                jLabel1.setText("adivinaste el codigo");
+            }
+        } else {
+            jLabel1.setText("Por favor, ingresa exactamente 3 numeros");
+        }
+    }
+    }//GEN-LAST:event_jTextField1KeyTyped
 
     /**
      * @param args the command line arguments
