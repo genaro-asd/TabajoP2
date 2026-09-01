@@ -10,15 +10,16 @@
 public class Secreto extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Secreto.class.getName());
-
+    private int numeroSecreto;
     /**
      * Creates new form Secreto
      */
     public Secreto() {
         initComponents();
-        int numR1 = (int) (Math.random()*9 + 1);
-        int numR2 = (int) (Math.random()*10);
-        int numR3 = (int) (Math.random()*10);
+       numeroSecreto =(int) (Math.random()*900 + 100);
+//            int numR1 = (int) (Math.random()*9 + 1);
+//            int numR2 = (int) (Math.random()*10);
+//            int numR3 = (int) (Math.random()*10);
     }
 
     /**
