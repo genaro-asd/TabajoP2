@@ -16,7 +16,7 @@ public class Secreto extends javax.swing.JFrame {
      */
     public Secreto() {
         initComponents();
-        int numR1 = (int) (Math.random()*10);
+        int numR1 = (int) (Math.random()*9 + 1);
         int numR2 = (int) (Math.random()*10);
         int numR3 = (int) (Math.random()*10);
     }
