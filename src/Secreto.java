@@ -10,16 +10,17 @@
 public class Secreto extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Secreto.class.getName());
-    private int numeroSecreto;
-    /**
-     * Creates new form Secreto
-     */
+// 1. Declaración global (afuera del constructor)
+    int numR1;
+    int numR2;
+    int numR3;
+    int intentos = 0;    
     public Secreto() {
         initComponents();
-       numeroSecreto =(int) (Math.random()*900 + 100);
-//            int numR1 = (int) (Math.random()*9 + 1);
-//            int numR2 = (int) (Math.random()*10);
-//            int numR3 = (int) (Math.random()*10);
+// 2. Asignación (ADENTRO del constructor, pero SIN la palabra 'int')
+        numR1 = (int) (Math.random() * 9 + 1);
+        numR2 = (int) (Math.random() * 10);
+        numR3 = (int) (Math.random() * 10);
     }
 
     /**
@@ -37,10 +38,10 @@ public class Secreto extends javax.swing.JFrame {
         jPasswordField1 = new javax.swing.JPasswordField();
         jPasswordField3 = new javax.swing.JPasswordField();
         jPasswordField2 = new javax.swing.JPasswordField();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblPista = new javax.swing.JLabel();
+        lblImagen = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jtxtIntento = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -102,26 +103,24 @@ public class Secreto extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jTextField1.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField1.setBorder(javax.swing.BorderFactory.createTitledBorder("Escribe 3 digitos + ENTER"));
-        jTextField1.addActionListener(this::jTextField1ActionPerformed);
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField1KeyTyped(evt);
-            }
-        });
+        lblPista.setText("Porfavor ingrese exactamente 3 numeros");
 
-        jLabel1.setText("Porfavor ingrese exactamente 3 numeros");
-
-        jLabel2.setText("jLabel2");
+        lblImagen.setText("jLabel2");
 
         jButton1.setText("jButton1");
 
+        jtxtIntento.setText("jTextField1");
+        jtxtIntento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtxtIntentoKeyTyped(evt);
+            }
+        });
+
         jDesktopPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jTextField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(lblPista, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(lblImagen, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jtxtIntento, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -133,15 +132,15 @@ public class Secreto extends javax.swing.JFrame {
                         .addGap(88, 88, 88)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(64, 64, 64)
+                        .addGap(77, 77, 77)
+                        .addComponent(jtxtIntento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(124, 124, 124)
                         .addComponent(jButton1)
-                        .addGap(93, 93, 93)
-                        .addComponent(jLabel2))
+                        .addGap(119, 119, 119)
+                        .addComponent(lblImagen))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGap(245, 245, 245)
-                        .addComponent(jLabel1)))
+                        .addComponent(lblPista)))
                 .addContainerGap(111, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
@@ -150,18 +149,13 @@ public class Secreto extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22))
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jLabel2))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addComponent(lblPista)
+                .addGap(53, 53, 53)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblImagen)
+                    .addComponent(jButton1)
+                    .addComponent(jtxtIntento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -169,12 +163,16 @@ public class Secreto extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jDesktopPane1)
+                .addContainerGap())
         );
 
         pack();
@@ -185,36 +183,60 @@ public class Secreto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordField2ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
-    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
-        // TODO add your handling code here:
-        if (evt.getKeyChar() == java.awt.event.KeyEvent.VK_ENTER) {
-        String texto = jTextField1.getText().trim();
 
-        if (texto.length() == 3 && texto.matches("\\d+")) {
-            
-            int numeroIngresado = Integer.parseInt(texto);
-            
-            if (numeroIngresado < numeroSecreto) {
-                jLabel1.setText("El número secreto es MAS ALTO");
-            } else if (numeroIngresado > numeroSecreto) {
-                jLabel1.setText("El número secreto es MAS BAJO");
-            } else {
-                jLabel1.setText("adivinaste el codigo");
-            }
-        } else {
-            jLabel1.setText("Por favor, ingresa exactamente 3 numeros");
-        }
-    }
+    private void txtIntentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+
+
     }//GEN-LAST:event_jTextField1KeyTyped
 
+    private void jtxtIntentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtIntentoKeyTyped
+        String texto = jtxtIntento.getText().trim();
+
+        if (texto.length() != 3 || !texto.matches("\\d+")) {
+            javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Por favor, ingresa exactamente 3 números.",
+                "Mensaje",
+                javax.swing.JOptionPane.INFORMATION_MESSAGE
+            );
+            jtxtIntento.setText("");
+            return;
+        }
+
+        intentos++;
+        String secretStr = String.valueOf(numR1) + String.valueOf(numR2) + String.valueOf(numR3);
+        
+        int codigoSecreto = Integer.parseInt(secretStr);
+        
+        if (texto.charAt(0) == secretStr.charAt(0)) jPasswordField1.setEchoChar((char) 0);
+        if (texto.charAt(1) == secretStr.charAt(1)) jPasswordField1.setEchoChar((char) 0);
+        if (texto.charAt(2) == secretStr.charAt(2)) jPasswordField1.setEchoChar((char) 0);
+
+        int numeroIngresado = Integer.parseInt(texto);
+
+        if (numeroIngresado < codigoSecreto) {
+            lblPista.setText("El número secreto es MÁS ALTO");
+        } else if (numeroIngresado > codigoSecreto) {
+            lblPista.setText("El número secreto es MÁS BAJO");
+        } else {
+
+            jPasswordField1.setEchoChar((char) 0);
+            jPasswordField2.setEchoChar((char) 0);
+            jPasswordField3.setEchoChar((char) 0);
+            lblPista.setText("¡Adivinaste el código!");
+            
+
+            
+        }
+
+        jtxtIntento.setText(""); 
+    }//GEN-LAST:event_jtxtIntentoKeyTyped
+
+/**/
     /**
      * @param args the command line arguments
      */
@@ -243,13 +265,13 @@ public class Secreto extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JPasswordField jPasswordField3;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jtxtIntento;
+    private javax.swing.JLabel lblImagen;
+    private javax.swing.JLabel lblPista;
     // End of variables declaration//GEN-END:variables
 }
