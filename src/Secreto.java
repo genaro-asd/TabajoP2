@@ -15,15 +15,15 @@ import javax.swing.ImageIcon;
 public class Secreto extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Secreto.class.getName());
-
-    /**
-     * Creates new form Secreto
-     */
+int numR1;
+    int numR2;
+    int numR3;
+    int intentos = 0;    
     public Secreto()  {
         initComponents();
-        int numR1 = (int) (Math.random() * 9 + 1);
-        int numR2 = (int) (Math.random() * 10);
-        int numR3 = (int) (Math.random() * 10);
+        numR1 = (int) (Math.random() * 9 + 1);
+        numR2 = (int) (Math.random() * 10);
+        numR3 = (int) (Math.random() * 10);
     }
     
     public void victoria (int intentos){
@@ -123,7 +123,7 @@ public class Secreto extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jTextField1.setForeground(new java.awt.Color(255, 255, 255));
+        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
         jTextField1.setBorder(javax.swing.BorderFactory.createTitledBorder("Escribe 3 digitos + ENTER"));
         jTextField1.addActionListener(this::jTextField1ActionPerformed);
 
@@ -202,7 +202,46 @@ public class Secreto extends javax.swing.JFrame {
     }//GEN-LAST:event_jPasswordField2ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
+ String texto = jTextField1.getText().trim();
+
+if (texto.length() != 3 || !texto.matches("\\d+")) {
+    javax.swing.JOptionPane.showMessageDialog(
+        this,
+        "Por favor, ingresa exactamente 3 números.",
+        "Mensaje",
+        javax.swing.JOptionPane.INFORMATION_MESSAGE
+    );
+    jTextField1.setText("");
+    jTextField1.requestFocusInWindow(); // Devuelve el cursor al campo de texto
+    return;
+}
+
+intentos++;
+        
+        String secretStr = String.valueOf(numR1) + String.valueOf(numR2) + String.valueOf(numR3);
+
+        int codigoSecreto = Integer.parseInt(secretStr);
+
+        if (texto.charAt(0) == secretStr.charAt(0)) jPasswordField1.setEchoChar((char) 0);
+        if (texto.charAt(1) == secretStr.charAt(1)) jPasswordField1.setEchoChar((char) 0);
+        if (texto.charAt(2) == secretStr.charAt(2)) jPasswordField1.setEchoChar((char) 0);
+        if (texto.charAt(1) == secretStr.charAt(1)) jPasswordField2.setEchoChar((char) 0);
+        if (texto.charAt(2) == secretStr.charAt(2)) jPasswordField3.setEchoChar((char) 0);
+
+        int numeroIngresado = Integer.parseInt(texto);
+
+        if (numeroIngresado < codigoSecreto) {
+            jLabel1.setText("El número secreto es MÁS ALTO");
+        } else if (numeroIngresado > codigoSecreto) {
+            jLabel1.setText("El número secreto es MÁS BAJO");
+        } else {
+
+            jPasswordField1.setEchoChar((char) 0);
+            jPasswordField2.setEchoChar((char) 0);
+            jPasswordField3.setEchoChar((char) 0);
+            jLabel1.setText("¡Adivinaste el código!");
+            
+        }
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
