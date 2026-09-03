@@ -1,3 +1,8 @@
+import java.awt.Image;
+import java.net.MalformedURLException;
+import java.net.URL;
+import javax.swing.ImageIcon;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -14,11 +19,28 @@ public class Secreto extends javax.swing.JFrame {
     /**
      * Creates new form Secreto
      */
-    public Secreto() {
+    public Secreto()  {
         initComponents();
-        int numR1 = (int) (Math.random()*9 + 1);
-        int numR2 = (int) (Math.random()*10);
-        int numR3 = (int) (Math.random()*10);
+        int numR1 = (int) (Math.random() * 9 + 1);
+        int numR2 = (int) (Math.random() * 10);
+        int numR3 = (int) (Math.random() * 10);
+    }
+    
+    public void victoria (int intentos){
+        try {
+            URL url = new URL("https://images.vexels.com/media/users/3/202189/isolated/lists/4f3a5cb84297726d74d69dce22676f83-trofeo-numero-1plano.png");
+            ImageIcon icon = new ImageIcon(url);
+            Image img = icon.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+            lbVictoria.setIcon(new ImageIcon(img));
+        } catch (MalformedURLException ex) {
+            System.getLogger(Secreto.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        
+        String text = "Lo conseguiste en " + intentos + " intentos";
+        
+        Victoria dialogo = new Victoria(this, true, text);
+        dialogo.setLocationRelativeTo(this);
+        dialogo.setVisible(true);
     }
 
     /**
@@ -38,7 +60,7 @@ public class Secreto extends javax.swing.JFrame {
         jPasswordField2 = new javax.swing.JPasswordField();
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lbVictoria = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -107,14 +129,14 @@ public class Secreto extends javax.swing.JFrame {
 
         jLabel1.setText("Porfavor ingrese exactamente 3 numeros");
 
-        jLabel2.setText("jLabel2");
+        lbVictoria.setFocusable(false);
 
         jButton1.setText("jButton1");
 
         jDesktopPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jTextField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(lbVictoria, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
@@ -132,7 +154,7 @@ public class Secreto extends javax.swing.JFrame {
                         .addGap(64, 64, 64)
                         .addComponent(jButton1)
                         .addGap(93, 93, 93)
-                        .addComponent(jLabel2))
+                        .addComponent(lbVictoria))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGap(245, 245, 245)
                         .addComponent(jLabel1)))
@@ -154,7 +176,7 @@ public class Secreto extends javax.swing.JFrame {
                         .addGap(53, 53, 53)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1)
-                            .addComponent(jLabel2))
+                            .addComponent(lbVictoria))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -216,12 +238,12 @@ public class Secreto extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JPasswordField jPasswordField3;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lbVictoria;
     // End of variables declaration//GEN-END:variables
 }
