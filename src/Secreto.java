@@ -13,17 +13,22 @@ import javax.swing.ImageIcon;
  * @author user
  */
 public class Secreto extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Secreto.class.getName());
-int numR1;
+    int numR1;
     int numR2;
     int numR3;
-    int intentos = 0;    
-    public Secreto()  {
+    int ayudas = 0;
+    int intentos = 0;
+
+    public Secreto() {
         initComponents();
         numR1 = (int) (Math.random() * 9 + 1);
         numR2 = (int) (Math.random() * 10);
         numR3 = (int) (Math.random() * 10);
+        jPasswordField1.setText(String.valueOf(numR1));
+        jPasswordField2.setText(String.valueOf(numR2));
+        jPasswordField3.setText(String.valueOf(numR3));
     }
     
     public void victoria (int intentos){
@@ -61,7 +66,7 @@ int numR1;
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         lbVictoria = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btn_ayuda = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -131,13 +136,18 @@ int numR1;
 
         lbVictoria.setFocusable(false);
 
-        jButton1.setText("jButton1");
+        btn_ayuda.setText("Ayuda");
+        btn_ayuda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ayudar(evt);
+            }
+        });
 
         jDesktopPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jTextField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(lbVictoria, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(btn_ayuda, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -152,7 +162,7 @@ int numR1;
                         .addGap(37, 37, 37)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(64, 64, 64)
-                        .addComponent(jButton1)
+                        .addComponent(btn_ayuda)
                         .addGap(93, 93, 93)
                         .addComponent(lbVictoria))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
@@ -175,7 +185,7 @@ int numR1;
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
+                            .addComponent(btn_ayuda)
                             .addComponent(lbVictoria))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
@@ -202,31 +212,39 @@ int numR1;
     }//GEN-LAST:event_jPasswordField2ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
- String texto = jTextField1.getText().trim();
+        String texto = jTextField1.getText().trim();
 
-if (texto.length() != 3 || !texto.matches("\\d+")) {
-    javax.swing.JOptionPane.showMessageDialog(
-        this,
-        "Por favor, ingresa exactamente 3 números.",
-        "Mensaje",
-        javax.swing.JOptionPane.INFORMATION_MESSAGE
-    );
-    jTextField1.setText("");
-    jTextField1.requestFocusInWindow(); // Devuelve el cursor al campo de texto
-    return;
-}
+        if (texto.length() != 3 || !texto.matches("\\d+")) {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "Por favor, ingresa exactamente 3 números.",
+                    "Mensaje",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE
+            );
+            jTextField1.setText("");
+            jTextField1.requestFocusInWindow(); // Devuelve el cursor al campo de texto
+            return;
+        }
 
-intentos++;
-        
+        intentos++;
+
         String secretStr = String.valueOf(numR1) + String.valueOf(numR2) + String.valueOf(numR3);
 
         int codigoSecreto = Integer.parseInt(secretStr);
 
-        if (texto.charAt(0) == secretStr.charAt(0)) jPasswordField1.setEchoChar((char) 0);
-        if (texto.charAt(1) == secretStr.charAt(1)) jPasswordField1.setEchoChar((char) 0);
-        if (texto.charAt(2) == secretStr.charAt(2)) jPasswordField1.setEchoChar((char) 0);
-        if (texto.charAt(1) == secretStr.charAt(1)) jPasswordField2.setEchoChar((char) 0);
-        if (texto.charAt(2) == secretStr.charAt(2)) jPasswordField3.setEchoChar((char) 0);
+        jPasswordField1.setText(String.valueOf(numR1));
+        jPasswordField2.setText(String.valueOf(numR2));
+        jPasswordField3.setText(String.valueOf(numR3));
+
+        if (texto.charAt(0) == secretStr.charAt(0)) {
+            jPasswordField1.setEchoChar((char) 0);
+        }
+        if (texto.charAt(1) == secretStr.charAt(1)) {
+            jPasswordField1.setEchoChar((char) 0);
+        }
+        if (texto.charAt(2) == secretStr.charAt(2)) {
+            jPasswordField1.setEchoChar((char) 0);
+        }
 
         int numeroIngresado = Integer.parseInt(texto);
 
@@ -241,13 +259,23 @@ intentos++;
             jPasswordField3.setEchoChar((char) 0);
             jLabel1.setText("¡Adivinaste el código!");
             victoria(intentos);
-            
+
         }
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordField1ActionPerformed
+
+    private void ayudar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ayudar
+        if(ayudas == 0){
+            jPasswordField1.setEchoChar((char)0);
+            ayudas++;
+        } else if (ayudas == 1) {
+            jPasswordField2.setEchoChar((char)0);
+            ayudas++;
+        }
+    }//GEN-LAST:event_ayudar
 
     /**
      * @param args the command line arguments
@@ -275,7 +303,7 @@ intentos++;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btn_ayuda;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
