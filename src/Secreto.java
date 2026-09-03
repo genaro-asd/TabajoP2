@@ -2,6 +2,7 @@ import java.awt.Image;
 import java.net.MalformedURLException;
 import java.net.URL;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -274,6 +275,8 @@ public class Secreto extends javax.swing.JFrame {
         } else if (ayudas == 1) {
             jPasswordField2.setEchoChar((char)0);
             ayudas++;
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "No hay más revelaciones");
         }
     }//GEN-LAST:event_ayudar
 
