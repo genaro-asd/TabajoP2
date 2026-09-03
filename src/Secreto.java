@@ -110,6 +110,7 @@ public class Secreto extends javax.swing.JFrame {
         jButton1.setText("jButton1");
 
         jtxtIntento.setText("jTextField1");
+        jtxtIntento.addActionListener(this::jtxtIntentoActionPerformed);
         jtxtIntento.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtxtIntentoKeyTyped(evt);
@@ -127,21 +128,22 @@ public class Secreto extends javax.swing.JFrame {
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addGap(77, 77, 77)
+                .addComponent(jtxtIntento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63)
+                .addComponent(jButton1)
+                .addGap(115, 115, 115)
+                .addComponent(lblImagen)
+                .addContainerGap(98, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(88, 88, 88)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(77, 77, 77)
-                        .addComponent(jtxtIntento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(124, 124, 124)
-                        .addComponent(jButton1)
-                        .addGap(119, 119, 119)
-                        .addComponent(lblImagen))
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(245, 245, 245)
-                        .addComponent(lblPista)))
-                .addContainerGap(111, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                        .addComponent(lblPista)
+                        .addGap(149, 149, 149))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(162, 162, 162))))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,24 +157,18 @@ public class Secreto extends javax.swing.JFrame {
                     .addComponent(lblImagen)
                     .addComponent(jButton1)
                     .addComponent(jtxtIntento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jDesktopPane1)
-                .addContainerGap())
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
@@ -194,7 +190,11 @@ public class Secreto extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1KeyTyped
 
     private void jtxtIntentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtIntentoKeyTyped
-        String texto = jtxtIntento.getText().trim();
+        
+    }//GEN-LAST:event_jtxtIntentoKeyTyped
+
+    private void jtxtIntentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtIntentoActionPerformed
+String texto = jtxtIntento.getText().trim();
 
         if (texto.length() != 3 || !texto.matches("\\d+")) {
             javax.swing.JOptionPane.showMessageDialog(
@@ -204,6 +204,7 @@ public class Secreto extends javax.swing.JFrame {
                 javax.swing.JOptionPane.INFORMATION_MESSAGE
             );
             jtxtIntento.setText("");
+            jtxtIntento.requestFocusInWindow();
             return;
         }
 
@@ -213,8 +214,8 @@ public class Secreto extends javax.swing.JFrame {
         int codigoSecreto = Integer.parseInt(secretStr);
         
         if (texto.charAt(0) == secretStr.charAt(0)) jPasswordField1.setEchoChar((char) 0);
-        if (texto.charAt(1) == secretStr.charAt(1)) jPasswordField1.setEchoChar((char) 0);
-        if (texto.charAt(2) == secretStr.charAt(2)) jPasswordField1.setEchoChar((char) 0);
+        if (texto.charAt(1) == secretStr.charAt(1)) jPasswordField2.setEchoChar((char) 0);
+        if (texto.charAt(2) == secretStr.charAt(2)) jPasswordField3.setEchoChar((char) 0);
 
         int numeroIngresado = Integer.parseInt(texto);
 
@@ -232,9 +233,8 @@ public class Secreto extends javax.swing.JFrame {
 
             
         }
-
-        jtxtIntento.setText(""); 
-    }//GEN-LAST:event_jtxtIntentoKeyTyped
+    
+    }//GEN-LAST:event_jtxtIntentoActionPerformed
 
 /**/
     /**
