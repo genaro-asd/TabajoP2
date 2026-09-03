@@ -240,6 +240,7 @@ intentos++;
             jPasswordField2.setEchoChar((char) 0);
             jPasswordField3.setEchoChar((char) 0);
             jLabel1.setText("¡Adivinaste el código!");
+            victoria(intentos);
             
         }
     }//GEN-LAST:event_jTextField1ActionPerformed
